@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+# task
+
+echo $$ > /tmp/myscript.pid
+
+handle_term() {
+    echo "I hate the kill command"
+    rm -f /tmp/myscript.pid
+    exit 0
+}
+
+handle_int() {
+    echo "Y U no love me?!"
+}
+
+handle_quit() {
+    rm -f /tmp/myscript.pid
+    exit 0
+}
+
+trap handle_term TERM
+trap handle_int INT
+trap handle_quit QUIT
+
+while true
+do
+    echo "To infinity and beyond"
+    sleep 2
+done
